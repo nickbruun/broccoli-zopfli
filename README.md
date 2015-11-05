@@ -1,6 +1,6 @@
 # Broccoli Zopfli gzip plugin
 
-[![Build Status](https://travis-ci.org/nickbruun/broccoli-zopfli.svg?branch=master)](https://travis-ci.org/nickbruun/broccoli-zopfli)
+[![Build Status](https://travis-ci.org/nickbruun/broccoli-zopfli.svg?branch=master)](https://travis-ci.org/nickbruun/broccoli-zopfli) [![npm version](https://badge.fury.io/js/broccoli-zopfli.svg)](https://badge.fury.io/js/broccoli-zopfli)
 
 Fork of [broccoli-gzip](https://github.com/salsify/broccoli-gzip) to use Zopfli instead of gzip to perform gzip compression. All credit goes to the original authors of broccoli-gzip.
 
