@@ -1,6 +1,6 @@
 {
     "name": "broccoli-zopfli",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Broccoli plugin to gzip trees using Zopfli",
     "main": "index.js",
     "author": "Nick Bruun",
