@@ -14,12 +14,13 @@ ZopfliFilter.prototype.constructor = ZopfliFilter;
  * Zopfli filter.
  *
  * @constructor
- * @param {object} inputTree - Input tree.
+ * @param {object} inputNode - Input node.
  * @param {object} options - Options.
  */
-function ZopfliFilter(inputTree, options) {
+function ZopfliFilter(inputNode, options) {
     if (!(this instanceof ZopfliFilter))
-        return new ZopfliFilter(inputTree, options);
+        return new ZopfliFilter(inputNode, options);
+    Filter.call(this, inputNode);
 
     options = options || {};
 
@@ -41,8 +42,6 @@ function ZopfliFilter(inputTree, options) {
     if (this.keepUncompressed && !this.appendSuffix) {
         throw new Error('Cannot keep uncompressed files without appending suffix. Filenames would be the same.');
     }
-
-    Filter.apply(this, arguments);
 }
 
 ZopfliFilter.prototype.processFile = function(srcDir, destDir, relativePath) {
