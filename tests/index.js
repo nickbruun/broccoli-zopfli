@@ -12,7 +12,7 @@ var csvContent = fs.readFileSync('tests/fixtures/sample-assets/test.csv');
 
 var builder;
 
-describe('broccoli-gzip', function(){
+describe('broccoli-zopfli', function(){
     afterEach(function() {
         if (builder) {
             builder.cleanup();
@@ -26,12 +26,13 @@ describe('broccoli-gzip', function(){
         });
 
         builder = new broccoli.Builder(tree);
-        return builder.build().then(function(build) {
-            var gzippedText = fs.readFileSync(build.directory + '/test.txt.gz');
+        return builder.build().then(function() {
+            var outputPath = builder.outputPath;
+            var gzippedText = fs.readFileSync(outputPath + '/test.txt.gz');
 
             return RSVP.hash({
-                dir: build.directory,
-                actualCsv: fs.readFileSync(build.directory + '/test.csv'),
+                dir: outputPath,
+                actualCsv: fs.readFileSync(outputPath + '/test.csv'),
                 actualText: RSVP.denodeify(zlib.gunzip)(gzippedText)
             });
         }).then(function(result) {
@@ -49,11 +50,12 @@ describe('broccoli-gzip', function(){
         });
 
         builder = new broccoli.Builder(tree);
-        return builder.build().then(function(build) {
-            var gzippedText = fs.readFileSync(build.directory + '/test.txt.gz');
+        return builder.build().then(function() {
+            var outputPath = builder.outputPath;
+            var gzippedText = fs.readFileSync(outputPath + '/test.txt.gz');
             return RSVP.hash({
-                dir: build.directory,
-                actualCsv: fs.readFileSync(build.directory + '/test.csv'),
+                dir: outputPath,
+                actualCsv: fs.readFileSync(outputPath + '/test.csv'),
                 actualText: RSVP.denodeify(zlib.gunzip)(gzippedText)
             });
         }).then(function(result) {
@@ -71,10 +73,11 @@ describe('broccoli-gzip', function(){
         });
 
         builder = new broccoli.Builder(tree);
-        return builder.build().then(function(build) {
-            var gzippedText = fs.readFileSync(build.directory + '/test.txt');
+        return builder.build().then(function() {
+            var outputPath = builder.outputPath;
+            var gzippedText = fs.readFileSync(outputPath + '/test.txt');
             return RSVP.hash({
-                dir: build.directory,
+                dir: outputPath,
                 actualText: RSVP.denodeify(zlib.gunzip)(gzippedText)
             });
         }).then(function(result) {
