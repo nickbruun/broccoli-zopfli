@@ -38,6 +38,10 @@ function ZopfliFilter(inputTree, options) {
                          options.appendSuffix :
                          true);
 
+    // Default file encoding is raw to handle binary files
+    this.inputEncoding = options.inputEncoding || null;
+    this.outputEncoding = options.outputEncoding || null;
+
     if (this.keepUncompressed && !this.appendSuffix) {
         throw new Error('Cannot keep uncompressed files without appending suffix. Filenames would be the same.');
     }
