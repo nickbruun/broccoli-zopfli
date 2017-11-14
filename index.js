@@ -46,7 +46,7 @@ function ZopfliFilter(inputTree, options) {
         throw new Error('Cannot keep uncompressed files without appending suffix. Filenames would be the same.');
     }
 
-    Filter.apply(this, arguments);
+    Filter.call(this, inputTree, options);
 }
 
 ZopfliFilter.prototype.processFile = function(srcDir, destDir, relativePath) {
@@ -57,6 +57,10 @@ ZopfliFilter.prototype.processFile = function(srcDir, destDir, relativePath) {
 
     return Filter.prototype.processFile.apply(this, arguments);
 };
+
+ZopfliFilter.prototype.baseDir = function() {
+  return __dirname;
+}
 
 ZopfliFilter.prototype.processString = function(str) {
     return RSVP.denodeify(zopfli.gzip)(new Buffer(str), this.zopfliOptions);
