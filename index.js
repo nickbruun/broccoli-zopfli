@@ -54,7 +54,7 @@ ZopfliFilter.prototype.processFile = function(srcDir, destDir, relativePath) {
 };
 
 ZopfliFilter.prototype.processString = function(str) {
-    return RSVP.denodeify(zopfli.gzip)(new Buffer(str), this.zopfliOptions);
+    return RSVP.denodeify(zopfli.gzip)(Buffer.from(str), this.zopfliOptions);
 };
 
 ZopfliFilter.prototype.getDestFilePath = function() {
