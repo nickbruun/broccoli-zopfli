@@ -3,7 +3,7 @@ var RSVP = require('rsvp'),
     helpers = require('broccoli-kitchen-sink-helpers'),
     Filter = require('broccoli-filter'),
     Buffer = require('buffer').Buffer,
-    zopfli = require('node-zopfli');
+    zopfli = require('@gfx/zopfli');
 
 
 ZopfliFilter.prototype = Object.create(Filter.prototype);
@@ -14,12 +14,12 @@ ZopfliFilter.prototype.constructor = ZopfliFilter;
  * Zopfli filter.
  *
  * @constructor
- * @param {object} inputTree - Input tree.
+ * @param {object} inputNode - Input node.
  * @param {object} options - Options.
  */
-function ZopfliFilter(inputTree, options) {
+function ZopfliFilter(inputNode, options) {
     if (!(this instanceof ZopfliFilter))
-        return new ZopfliFilter(inputTree, options);
+        return new ZopfliFilter(inputNode, options);
 
     options = options || {};
 
@@ -28,7 +28,6 @@ function ZopfliFilter(inputTree, options) {
         blocksplitting: (options.blockSplitting === undefined ?
                          true :
                          options.blockSplitting),
-        blocksplittinglast: !!options.blockSplittingLast,
         blocksplittingmax: (options.blockSplittingMax === undefined ?
                             15 :
                             options.blockSplittingMax)
@@ -42,7 +41,7 @@ function ZopfliFilter(inputTree, options) {
         throw new Error('Cannot keep uncompressed files without appending suffix. Filenames would be the same.');
     }
 
-    Filter.apply(this, arguments);
+    Filter.call(this, inputNode, options);
 }
 
 ZopfliFilter.prototype.processFile = function(srcDir, destDir, relativePath) {
@@ -55,7 +54,7 @@ ZopfliFilter.prototype.processFile = function(srcDir, destDir, relativePath) {
 };
 
 ZopfliFilter.prototype.processString = function(str) {
-    return RSVP.denodeify(zopfli.gzip)(new Buffer(str), this.zopfliOptions);
+    return RSVP.denodeify(zopfli.gzip)(Buffer.from(str), this.zopfliOptions);
 };
 
 ZopfliFilter.prototype.getDestFilePath = function() {

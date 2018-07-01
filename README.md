@@ -1,25 +1,31 @@
-# Broccoli Zopfli gzip plugin
+[![npm version](https://img.shields.io/npm/v/@floatboth/broccoli-zopfli.svg)](https://www.npmjs.com/package/@floatboth/broccoli-zopfli)
+[![npm downloads](https://img.shields.io/npm/dt/@floatboth/broccoli-zopfli.svg)](https://www.npmjs.com/package/@floatboth/broccoli-zopfli)
+[![Build Status](https://travis-ci.org/myfreeweb/broccoli-zopfli.svg?branch=master)](https://travis-ci.org/myfreeweb/broccoli-zopfli)
+[![MIT License](https://img.shields.io/badge/mit-license-green.svg?style=flat)](https://mit-license.org/)
 
-[![Build Status](https://travis-ci.org/nickbruun/broccoli-zopfli.svg?branch=master)](https://travis-ci.org/nickbruun/broccoli-zopfli) [![npm version](https://badge.fury.io/js/broccoli-zopfli.svg)](https://badge.fury.io/js/broccoli-zopfli)
+# Broccoli Zopfli gzip plugin
 
 Fork of [broccoli-gzip](https://github.com/salsify/broccoli-gzip) to use Zopfli instead of gzip to perform gzip compression. All credit goes to the original authors of broccoli-gzip.
 
+This version is compatible with Broccoli 1.x.
+
+Uses [WebAssembly compiled Zopfli](https://github.com/gfx/universal-zopfli-js) to avoid all the native compilation.
 
 ## Installation
 
 ```bash
-$ npm install broccoli-zopfli
+$ npm i @floatboth/broccoli-zopfli
 ```
 
 
 ## Example
 
 ```javascript
-var zopfliGzipFiles = require('broccoli-zopfli');
+const zopfliGzipFiles = require('@floatboth/broccoli-zopfli')
 
-var tree = zopfliGzipFiles('app', {
+const tree = zopfliGzipFiles('app', {
   extensions: ['js', 'css', 'svg']
-});
+})
 ```
 
 
@@ -56,12 +62,6 @@ Maximum amount of times to rerun forward and backward pass to optimize LZ77 comp
 `options.blockSplitting` *{Boolean}* (optional, default `true`) 
 
 If true, splits the data in multiple deflate blocks with optimal choice for the block boundaries. Block splitting gives better compression.
-
----
-
-`options.blockSplittingLast` *{Boolean}* (optional, default `false`) 
-
-If true, chooses the optimal block split points only after doing the iterative LZ77 compression. If false, chooses the block split points first, then does iterative LZ77 on each individual block. Depending on the file, either first or last gives the best compression.
 
 ---
 
