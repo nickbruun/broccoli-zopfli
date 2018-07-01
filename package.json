@@ -1,6 +1,6 @@
 {
     "name": "@floatboth/broccoli-zopfli",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Broccoli plugin to gzip trees using Zopfli",
     "main": "index.js",
     "author": "Greg V",
