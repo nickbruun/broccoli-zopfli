@@ -3,7 +3,7 @@ var RSVP = require('rsvp'),
     helpers = require('broccoli-kitchen-sink-helpers'),
     Filter = require('broccoli-filter'),
     Buffer = require('buffer').Buffer,
-    zopfli = require('node-zopfli');
+    zopfli = require('@gfx/zopfli');
 
 
 ZopfliFilter.prototype = Object.create(Filter.prototype);
@@ -28,7 +28,6 @@ function ZopfliFilter(inputNode, options) {
         blocksplitting: (options.blockSplitting === undefined ?
                          true :
                          options.blockSplitting),
-        blocksplittinglast: !!options.blockSplittingLast,
         blocksplittingmax: (options.blockSplittingMax === undefined ?
                             15 :
                             options.blockSplittingMax)

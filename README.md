@@ -9,6 +9,8 @@ Fork of [broccoli-gzip](https://github.com/salsify/broccoli-gzip) to use Zopfli 
 
 This version is compatible with Broccoli 1.x.
 
+Uses [WebAssembly compiled Zopfli](https://github.com/gfx/universal-zopfli-js) to avoid all the native compilation.
+
 ## Installation
 
 ```bash
@@ -60,12 +62,6 @@ Maximum amount of times to rerun forward and backward pass to optimize LZ77 comp
 `options.blockSplitting` *{Boolean}* (optional, default `true`) 
 
 If true, splits the data in multiple deflate blocks with optimal choice for the block boundaries. Block splitting gives better compression.
-
----
-
-`options.blockSplittingLast` *{Boolean}* (optional, default `false`) 
-
-If true, chooses the optimal block split points only after doing the iterative LZ77 compression. If false, chooses the block split points first, then does iterative LZ77 on each individual block. Depending on the file, either first or last gives the best compression.
 
 ---
 
